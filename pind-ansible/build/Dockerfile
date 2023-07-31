@@ -5,6 +5,7 @@ RUN dnf -y update \
     && dnf clean all \
     && rm -rf /var/cache /var/log/dnf* /var/log/yum.*;
 
+## Terraform build provides USER => data.coder_workspace.me.owner
 ARG USER=coder
 RUN groupadd -r ${USER} \
     && useradd -u 998 -m -r -g ${USER} --shell /bin/bash ${USER} \
