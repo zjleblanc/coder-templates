@@ -17,5 +17,8 @@ RUN groupadd -r ${USER} \
     && echo 'export PATH=$HOME/.local/bin:$PATH' >> /home/${USER}/.bashrc
 
 USER ${USER}
-RUN pip install ansible ansible-navigator ansible-lint --user 
+ARG EE_IMAGE=quay.io/ansible/creator-ee
+RUN curl -o /home/${USER}/ansible-navigator.yml https://raw.githubusercontent.com/zjleblanc/coder-templates/master/pind-ansible/build/ansible-navigator.yml \
+    && sed -i 's,image:.*,image: ${EE_IMAGE},g' ansible-navigator.yml \
+    && pip install ansible ansible-navigator ansible-lint --user 
 WORKDIR /home/${USER}

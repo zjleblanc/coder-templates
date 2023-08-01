@@ -24,6 +24,15 @@ provider "docker" {
 data "coder_workspace" "me" {
 }
 
+data "coder_parameter" "ee_image" {
+  name        = "EE Image"
+  type        = "string"
+  mutable     = false 
+  description = "ansible-navigator execution environment image"
+  default     = "quay.io/ansible/creator-ee"
+  icon        = "https://raw.githubusercontent.com/zjleblanc/coder-templates/master/logos/ee.svg"
+}
+
 resource "coder_agent" "main" {
   arch                   = data.coder_provisioner.me.arch
   os                     = "linux"
@@ -163,6 +172,7 @@ resource "docker_image" "main" {
     context = "./build"
     build_args = {
       USER = local.username
+      EE_IMAGE = data.coder_parameter.ee_image.value
     }
   }
   triggers = {

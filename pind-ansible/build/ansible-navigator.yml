@@ -1,0 +1,16 @@
+---
+ansible-navigator:
+  app: welcome
+  mode: stdout
+  execution-environment:
+    container-engine: podman
+    image: quay.io/ansible/creator-ee
+    pull:
+      policy: missing
+      arguments:
+        - "--tls-verify=false"
+  logging:
+    level: debug
+  editor:
+    command: code-server {filename}
+    console: false

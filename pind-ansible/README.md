@@ -57,7 +57,7 @@ Follow these steps to configure accessing your workspaces locally on any machine
    ```bash
    coder templates edit --display-name "Podman in Docker + Ansible" ansible
    coder templates edit --description "Develop Ansible workloads in a Docker container with Podman" ansible
-   coder templates edit --icon "https://raw.githubusercontent.com/zjleblanc/coder-templates/master/logos/podman.png" ansible
+   coder templates edit --icon "https://raw.githubusercontent.com/zjleblanc/coder-templates/master/logos/ansible.svg" ansible
    ```
 
 1. Create a workspace
