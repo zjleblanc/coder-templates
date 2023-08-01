@@ -1,7 +1,7 @@
 ---
 ansible-navigator:
   app: welcome
-  mode: stdout
+  # mode: stdout
   execution-environment:
     container-engine: podman
     image: quay.io/ansible/creator-ee
