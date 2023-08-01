@@ -2,7 +2,7 @@
 name: Podman in Docker + Ansible
 description: Develop Ansible workloads in a Docker container with Podman
 tags: [local, docker, ansible, podman]
-icon: https://raw.githubusercontent.com/zjleblanc/coder-templates/master/logos/podman.png
+icon: https://raw.githubusercontent.com/zjleblanc/coder-templates/master/logos/ansible.svg
 ---
 
 # podman in docker + ansible
