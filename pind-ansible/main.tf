@@ -25,10 +25,10 @@ data "coder_workspace" "me" {
 }
 
 data "coder_parameter" "ee_image" {
-  name        = "EE Image"
+  name        = "Default Navigator Execution Environment Image"
   type        = "string"
   mutable     = false 
-  description = "ansible-navigator execution environment image"
+  description = "default ansible-navigator ee (can be changed in ~/ansible-navigator.yml)"
   default     = "quay.io/ansible/creator-ee"
   icon        = "https://raw.githubusercontent.com/zjleblanc/coder-templates/master/logos/ee.svg"
 }

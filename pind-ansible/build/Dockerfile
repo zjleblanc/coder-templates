@@ -7,18 +7,18 @@ RUN dnf -y update \
 
 ## Terraform build provides USER => data.coder_workspace.me.owner
 ARG USER=coder
+ARG EE_IMAGE=quay.io/ansible/creator-ee
 RUN groupadd -r ${USER} \
     && useradd -u 998 -m -r -g ${USER} --shell /bin/bash ${USER} \
     && echo -e "${USER}:1:997\n${USER}:1001:64535" > /etc/subuid \
     && echo -e "${USER}:1:997\n${USER}:1001:64535" > /etc/subgid \
 	&& echo "${USER} ALL=(ALL) NOPASSWD:ALL" >/etc/sudoers.d/${USER} \
 	&& chmod 0440 /etc/sudoers.d/${USER} \
-    && chown -R ${USER}:${USER} /home/${USER} \
-    && echo 'export PATH=$HOME/.local/bin:$PATH' >> /home/${USER}/.bashrc
+    && echo 'export PATH=$HOME/.local/bin:$PATH' >> /home/${USER}/.bashrc \
+    && curl -o /home/${USER}/ansible-navigator.yml https://raw.githubusercontent.com/zjleblanc/coder-templates/master/pind-ansible/build/ansible-navigator.yml \
+    && sed -i "s,image:.*,image: ${EE_IMAGE},g" /home/${USER}/ansible-navigator.yml \
+    && chown -R ${USER}:${USER} /home/${USER}
 
 USER ${USER}
-ARG EE_IMAGE=quay.io/ansible/creator-ee
-RUN curl -o /home/${USER}/ansible-navigator.yml https://raw.githubusercontent.com/zjleblanc/coder-templates/master/pind-ansible/build/ansible-navigator.yml \
-    && sed -i 's,image:.*,image: ${EE_IMAGE},g' ansible-navigator.yml \
-    && pip install ansible ansible-navigator ansible-lint --user 
+RUN pip install ansible ansible-navigator ansible-lint --user 
 WORKDIR /home/${USER}
